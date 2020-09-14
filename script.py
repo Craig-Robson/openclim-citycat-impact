@@ -23,26 +23,29 @@ def select_by_intersect(df1, df2, unique_column):
 def main():
     """
     """
+    # data location
+    input_path = 'data/'
+    output_path = 'outputs/'
 
     # load in data
-    buildings = gpd.read_file('buildings_E08000021/buildings.geojson', encoding='UTF-8')
-    flooding = gpd.read_file('flooding_example.geojson', encoding='UTF-8')
+    buildings = gpd.read_file(input_path+'buildings.shp', encoding='UTF-8')
+    flooding = gpd.read_file(input_path+'flooding_example.geojson', encoding='UTF-8')
 
     # run select by location - find the buildings which fall in flood areas
     flooded_buildings = select_by_intersect(buildings, flooding, 'toid')
 
     # save flooded buildings to file
     if flooded_buildings.shape[0] > 0:
-        flooded_buildings.to_file('flooded_buildings.geojson', driver='GeoJSON')
+        flooded_buildings.to_file(output_path+'flooded_buildings.geojson', driver='GeoJSON')
 
     # load in nature reserves
-    nature_reserves = gpd.read_file('local_nature_reserves.geojson', encoding='UTF-8')
+    nature_reserves = gpd.read_file(input_path+'local_nature_reserves.geojson', encoding='UTF-8')
 
     # run select by location - find the reserves which fall in flood areas
     flooded_reserves = select_by_intersect(nature_reserves, flooding, 'OBJECTID')
 
     # save flooded reserves to file
     if flooded_reserves.shape[0] > 0:
-        flooded_reserves.to_file('flooded_reserves.geojson', driver='GeoJSON')
+        flooded_reserves.to_file(output_path+'flooded_reserves.geojson', driver='GeoJSON')
 
 main()
