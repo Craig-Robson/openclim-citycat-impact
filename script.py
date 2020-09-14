@@ -31,6 +31,10 @@ def main():
     buildings = gpd.read_file(input_path+'buildings.shp', encoding='UTF-8')
     flooding = gpd.read_file(input_path+'flooding_example.geojson', encoding='UTF-8')
 
+    # convert to WGS 84
+    flooding = flooding.to_crs("EPSG:4326")
+    buildings = buildings.to_crs("EPSG:4326")
+
     # run select by location - find the buildings which fall in flood areas
     flooded_buildings = select_by_intersect(buildings, flooding, 'toid')
 
@@ -40,6 +44,9 @@ def main():
 
     # load in nature reserves
     nature_reserves = gpd.read_file(input_path+'local_nature_reserves.geojson', encoding='UTF-8')
+
+    # convert to WGS 84
+    nature_reserves = nature_reserves.to_crs("EPSG:4326")
 
     # run select by location - find the reserves which fall in flood areas
     flooded_reserves = select_by_intersect(nature_reserves, flooding, 'OBJECTID')

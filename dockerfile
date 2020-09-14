@@ -4,4 +4,8 @@ RUN apt-get -y update \
 COPY requirements.txt /
 RUN pip install -r requirements.txt
 COPY script.py /
+COPY data /data
 RUN mkdir /outputs
+
+# run
+CMD ["python", "script.py"]
