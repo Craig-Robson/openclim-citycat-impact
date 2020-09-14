@@ -1,0 +1,11 @@
+kind: Model
+apiVersion: v1alpha3
+metadata:
+  displayName: OpenCLIM Flooding Impact (v01)
+  name: openclim-flooding-impact-v01
+  summary: Identify the impact of flooding on the local environment
+  description: >
+    Using flooding extents, estimates the buildings and local nature reserves which could be flooded as a result of the flooding event
+  type: testing
+spec:
+  inputs:

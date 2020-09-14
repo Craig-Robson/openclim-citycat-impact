@@ -32,7 +32,8 @@ def main():
     flooded_buildings = select_by_intersect(buildings, flooding, 'toid')
 
     # save flooded buildings to file
-    flooded_buildings.to_file('flooded_buildings.geojson', driver='GeoJSON')
+    if flooded_buildings.shape[0] > 0:
+        flooded_buildings.to_file('flooded_buildings.geojson', driver='GeoJSON')
 
     # load in nature reserves
     nature_reserves = gpd.read_file('local_nature_reserves.geojson', encoding='UTF-8')
