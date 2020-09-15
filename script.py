@@ -25,7 +25,7 @@ def main():
     """
     # data location
     input_path = 'data/'
-    output_path = 'outputs/'
+    output_path = '/data/outputs/'
 
     # load in data
     buildings = gpd.read_file(input_path+'buildings.shp', encoding='UTF-8')
